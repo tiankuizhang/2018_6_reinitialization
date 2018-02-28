@@ -20,6 +20,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 
     mwSize n1 = mxGetNumberOfElements(prhs[0]);
     mwSize n2 = mxGetNumberOfElements(prhs[1]);
+    int nts = (int)mxGetScalar(prhs[2]);
     if (n1 != n2)
     {
         mexErrMsgIdAndTxt("example:add:prhs", "A and B must have the same number of elements.");
@@ -31,7 +32,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     double *C = mxGetPr(mC);
     
     // Compute the sum in parallel.
-    #pragma omp parallel for default(none) shared(C,A,B,n1) 
+    omp_set_num_threads(nts);
+    #pragma omp parallel for  default(none) shared(C,A,B,n1) 
     for (int i = 0;i < n1;i++)
     {   
         int tid = omp_get_thread_num();
