@@ -57,7 +57,7 @@ classdef SDF3 < handle
 		function obj = SDF3(Xm, Ym, Zm, Val)
 			obj.GD3 = SD.GD3(Xm, Ym, Zm);
 			obj.Sme_Thk = obj.GD3.Dx * 1.5;
-			%obj.reinitialization(Val)
+			obj.reinitialization(Val)
 			obj.En_Volume = obj.VolumeIntegral(1);
 			obj.Suf_Area = obj.SurfaceIntegral(1);
 			obj.Red_Vol = (3*obj.En_Volume/4/pi) * (4*pi/obj.Suf_Area)^(3/2);
