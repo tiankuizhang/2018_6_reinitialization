@@ -10,6 +10,10 @@
 * AUTHOR: Blaise Barney  5/99
 * LAST REVISED: 04/06/05
 ******************************************************************************/
+
+/*
+ * compile with: gcc omp_hello.c -fopenmp -o omp_hello
+ */
 #include <omp.h>
 #include <stdio.h>
 #include <stdlib.h>
