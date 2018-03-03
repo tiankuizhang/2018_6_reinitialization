@@ -25,7 +25,7 @@ void reinitialization(double * re_lsf, double * lsf, int cols, int rows, int pge
 	double *zpd = (double *)mxCalloc((mwSize)num_ele,sizeof(double));
 
 	for(int ind = 0; ind < num_ele; ++ind){
-			mask[ind] = lsf[ind]<0 ;
+			mask[ind] = (bool)(lsf[ind]<0) ;
 			re_lsf[ind] = lsf[ind];
 			xpr[ind] = dx;
 			xpl[ind] = dx;
@@ -70,7 +70,7 @@ void reinitialization(double * re_lsf, double * lsf, int cols, int rows, int pge
 					int down = sub2ind(row_idx, col_idx, pge_idx-1, rows, cols, pges);
 					int up2 = sub2ind(row_idx, col_idx, pge_idx+2, rows, cols, pges);		
 					zpu[ind] = sp(lsf[down], f0, f2, lsf[up2], dz);
-					zpd[ind] = dz - zpu[ind];
+					zpd[up] = dz - zpu[ind]; 
 				}
 				
 			}
@@ -84,7 +84,7 @@ void reinitialization(double * re_lsf, double * lsf, int cols, int rows, int pge
 		deltat[ind] = 0.3 * min2(minx,min2(miny,minz));	
 	}
 
-	// iteraction with runge kutta to update the distance map
+	// iteration with runge kutta to update the distance map
 	// re_lsf will serve as the current distance map
 	double *step = (double *)mxCalloc((mwSize)num_ele, sizeof(double)); // hold time step
 	double *intermediate = (double *)mxCalloc((mwSize)num_ele, sizeof(double)); // hold intermediate step
@@ -105,16 +105,16 @@ void reinitialization(double * re_lsf, double * lsf, int cols, int rows, int pge
 
 
 
-
-
 	mxFree(mask);	
 	mxFree(deltat);
+
 	mxFree(xpr);
 	mxFree(xpl);
 	mxFree(ypf);
 	mxFree(ypb);
 	mxFree(zpu);
 	mxFree(zpd);
+
 	mxFree(step);
 	mxFree(intermediate);
 

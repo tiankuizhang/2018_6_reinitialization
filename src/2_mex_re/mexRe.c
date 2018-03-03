@@ -4,7 +4,7 @@
  * dx,dy,dz : grid spacing in x,y,z direction
  * 
  * (failed to set CFLAGS)compile on linux : mex mexRe.c Re.c CXXFLAGS="$CXXFLAGS -std=c99"
- * (worked)compile on linux : mex -v mexRe.c Re.c re_step.c func.c CFLAGS="$CFLAGS -std=c99"
+ * (worked)compile on linux : mex -v mexRe.c Re.c re_step.c func.c CFLAGS="$CFLAGS -std=c99 -O3"
  */
 
 #include "mex.h"

@@ -38,10 +38,13 @@ inline double min_mod(double x, double y)
 
 inline double sign(double x)
 {
-	return (x<0) ? -1.0 : 1.0;
+	return (x>0) ? 1.0 : -1.0;
 }
 
-// if f0*f2<0, return distance from f0 to boundary
+/****************************************************************************** 
+ * used in Re.c to calculate distance to the bundary
+ * if v0*f2<0, return distance from v0 to boundary
+ ******************************************************************************/
 inline double sp(double v1, double v0, double v2, double v3, double ds)
 {
 	double epsilon=10e-10;
@@ -72,24 +75,29 @@ inline double dist_turn(double ds, double v0, double v2)
 }
 // above are some scaffold functions to calculate sp
 
-// calculate Eno derivatives at node v0: [v4,v1,v0,v2,v3]
-inline double eno_derivative(double v4, double v1, double v0, double v2, double v3, 
-	double pr, double pl, double ds, double * sR, double * sL)
+/****************************************************************************** 
+ * used in re_step to calculate reinitialization step
+ * calculate Eno derivatives at node v0: [v4,v1,v0,v2,v3]
+ ******************************************************************************/
+extern inline double_eno_derivative eno_derivative(
+	double v4, double v1, double v0, double v2, double v3, 
+	double pr, double pl, double ds)
 {
 	double p2m, dsp;
+	double_eno_derivative eno_d;
 
 	double p2 = v1 - 2.0 * v0 + v2;
 
 	double p2r = v0 - 2.0 * v2 + v3;
 	p2m = 0.5 * min_mod(p2, p2r) / pow(ds, 2);
-	dsp = (pr<ds) ? pr : ds;
-	double vr = (pr<ds) ? 0 : v2;
-	(*sR) = (vr - v0) / dsp - dsp * p2m;
+	double vr = (pr==ds) ? v2 : 0;
+	eno_d.sR = (vr - v0) / pr - pr * p2m;
 
 	double p2l = v0 - 2.0 * v1 + v4;
 	p2m = 0.5 * min_mod(p2, p2l) / pow(ds, 2);
-	dsp = (pl<ds) ? pl : ds;
-	double vl = (pl<ds) ? 0 : v1;
-	(*sL) = (v0 - vl) / dsp + dsp * p2m;
+	double vl = (pl==ds) ? v1 : 0;
+	eno_d.sL = (v0 - vl) / pl + pl * p2m;
+
+	return eno_d;
 
 }
