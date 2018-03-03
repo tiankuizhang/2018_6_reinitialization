@@ -8,7 +8,9 @@ void re_step(double * step, double * re_lsf, bool * mask, double * deltat,
 	int rows, int cols, int pges, double dx, double dy, double dz, int num_ele)
 {
 
-	/* Adding the following code gives a 4 times speedup!
+	/* Adding the following 1 lines of code gives a 4 times speedup on computer in the lab
+	 * and 14 times speed up on a node in the cluster
+	 * Omp ! Oh my wonders!
 	 */
 	#pragma omp parallel for default(none) shared(step, re_lsf, mask, deltat, \
 		xpr, xpl, ypf, ypb, zpu, zpd, rows, cols, pges, dx, dy, dz, num_ele)
