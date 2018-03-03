@@ -1,15 +1,16 @@
-/* A serial implementation of reinitialization scheme
+/* implementation of reinitialization scheme
+ * trying to use openmp 
  * calling syntax : new_lsf = mexRe(lsf,dx,dy,dz)
  * lsf : old 3d level set function
  * dx,dy,dz : grid spacing in x,y,z direction
  * 
- * (failed to set CFLAGS)compile on linux : mex mexRe.c Re.c CXXFLAGS="$CXXFLAGS -std=c99"
- * (worked)compile on linux : mex -v mexRe.c Re.c re_step.c func.c CFLAGS="$CFLAGS -std=c99 -O3"
- * takes about 6.55 seconds to run
+ * (failed to set CFLAGS)compile on linux : mex mexOmpRe.c Re.c CXXFLAGS="$CXXFLAGS -std=c99"
+ * (worked)compile on linux : mex -v mexOmpRe.c Re.c re_step.c func.c CFLAGS="$CFLAGS -std=c99 -O3"
  */
 
 #include "mex.h"
-#include "mexRe.h"
+#include "omp.h"
+#include "mexOmpRe.h"
 
 enum in_put {
 	level_set_function = 0,
@@ -24,6 +25,7 @@ enum out_put {
 
 void mexFunction(int nlhs, mxArray * plhs[], int nrhs, const mxArray * prhs[])
 {	
+
 	mxClassID category;
 
 	if(nrhs != 4){
