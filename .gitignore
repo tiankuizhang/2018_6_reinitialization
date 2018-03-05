@@ -1,2 +1,4 @@
 #ignore mex excutable
 *.mexa64
+#ignore ptx files 
+*.ptx
