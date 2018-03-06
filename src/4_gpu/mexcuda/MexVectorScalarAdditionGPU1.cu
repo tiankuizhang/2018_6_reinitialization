@@ -31,8 +31,8 @@ void mexFunction(int nlhs, mxArray * plhs[], int nrhs, const mxArray * prhs[])
 	char const * const errMsg = "Invalid input to MEX file.";
 
 	if(nrhs !=2 || !mxIsDouble(prhs[0]) || mxIsComplex(prhs[0]) 
-		    || !mxIsDouble(prhs[1]) || mxIsComplex(prhs[1])
-		    || mxGetNumberOfElements(prhs[1]) != 1){
+				|| !mxIsDouble(prhs[1]) || mxIsComplex(prhs[1])
+				|| mxGetNumberOfElements(prhs[1]) != 1){
 		mexErrMsgIdAndTxt(errId, errMsg);
 	}
 
@@ -58,3 +58,4 @@ void mexFunction(int nlhs, mxArray * plhs[], int nrhs, const mxArray * prhs[])
 	cudaFree(deviceA);
 	cudaFree(deviceC);
 }
+
