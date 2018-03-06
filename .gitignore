@@ -2,3 +2,7 @@
 *.mexa64
 #ignore ptx files 
 *.ptx
+#ignore tmp files
+*.swp 
+# ignore matlab live scripts
+*.mlx 
