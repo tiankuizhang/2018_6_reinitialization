@@ -5,8 +5,6 @@
 
 
 
-
-
 void reinitialization(double * re_lsf, double * lsf, int cols, int rows, int pges, 
 	double dx, double dy, double dz, int num_ele)
 {

@@ -2,9 +2,7 @@
 #include "mexRe.h"
 #include "math.h"
 
-void re_step(double * step, double * re_lsf, bool * mask, double * deltat, 
-	double * xpr, double * xpl, double * ypf, double * ypb, double * zpu, double * zpd, 
-	int rows, int cols, int pges, double dx, double dy, double dz, int num_ele)
+void re_step(double * step, double * re_lsf, bool * mask, double * deltat, double * xpr, double * xpl, double * ypf, double * ypb, double * zpu, double * zpd, int rows, int cols, int pges, double dx, double dy, double dz, int num_ele)
 {
 
 	for(int pge_idx = 0; pge_idx < pges; ++pge_idx){
