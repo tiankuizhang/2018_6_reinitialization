@@ -3,7 +3,7 @@
  * source code for reinitialization scheme. combine code in one file for easier
  * organization and precalculate index shift matrices
  * takes 0.23s for a 64x64x64 array. 8 times faster than serial code
- * compile : mex mexOmpReV2.c CFLAGS="$CFLAGS -std=c99 -fopenmp -O3" LDFLAGS="$LDFLAGS -fopenmp"
+ * compile : mex mexOmpReV3.c CFLAGS="$CFLAGS -std=c99 -fopenmp -O3" LDFLAGS="$LDFLAGS -fopenmp"
  ******************************************************************************/
 
 #include "mex.h"
