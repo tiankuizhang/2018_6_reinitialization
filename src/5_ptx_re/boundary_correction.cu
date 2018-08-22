@@ -64,7 +64,7 @@ double sp(double v1, double v0, double v2, double v3, double ds)
 	double p2l = v2 - 2.0 * v0 + v1;
 	double p2r = v3 - 2.0 * v2 + v0;
 	double p2 = min_mod(p2l, p2r);
-	if(p2>epsilon){
+	if(p2>epsilon || p2<-epsilon){
 		double disc = pow((0.5*p2-v0-v2),2) - 4.*v0*v2;
 		double dist =  ds * (0.5 + (v0-v2 - sign(v0-v2)*sqrt(disc)) / p2 );
 		return dist;
